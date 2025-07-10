@@ -1,34 +1,21 @@
 #ifndef _HISTORY_
 #define _HISTORY_
 
-typedef struct s_Item {
+
+struct HistoryItem {
   int id;
   char *str;
-  struct s_Item *next;
-} Item;
+  struct HistoryItem *next;
+};
 
-typedef struct s_List {
-  struct s_Item *root;
-} List;
+//adds item to end of list
+void add_history(struct HistoryItem **head, int id, char *str);
 
-/* Initialize the linked list to keep the history. */
-List* init_history();
+void print_history(struct HistoryItem *head);
 
-/* Add a history item to the end of the list.
-   List* list - the linked list
-   char* str - the string to store
-*/
-void add_history(List *list, char *str);
-
-/* Retrieve the string stored in the node where Item->id == id.
-   List* list - the linked list
-   int id - the id of the Item to find */
-char *get_history(List *list, int id);
-
-/*Print the entire contents of the list. */
-void print_history(List *list);
+struct HistoryItem *recall_history(struct HistoryItem *head, int id);
 
 /*Free the history list and the strings it references. */
-void free_history(List *list);
+void free_history(struct HistoryItem *head);
 
 #endif
